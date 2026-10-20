@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Viajero frecuente</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body class="bienvenida">
+<div>
+
+    <div class="i_bienvenida">
+    <h1>Bienvenido, {{ usuario }}</h1>
+    <a class="button" href="{{ url_for('nuevo_viaje') }}">Organizar viaje</a>
+    <a class="button secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </div>
+
+    {% for mensaje in get_flashed_messages() %}
+        <p class="message">{{ mensaje }}</p>
+    {% endfor %}
+
+    <div>
+        <table class="t_viajes">
+            <thead>
+                <tr>
+                    <th>Destino</th>
+                    <th>Organizador</th>
+                    <th>Fecha inicio</th>
+                    <th>Fecha fin</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for viaje in viajes %}
+                    <tr>
+                        <td>{{ viaje.destino }}</td>
+                        <td>{{ viaje.usuario }}</td>
+                        <td>{{ viaje.fecha_inicio.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ viaje.fecha_fin.strftime('%Y-%m-%d') }}</td>
+                        <td>
+                            <a href="{{ url_for('ver_viaje', viaje_id=viaje.id) }}">Ver</a>
+                            {% if viaje.usuario_id == session.get('usuario_id') %}
+                                <a href="{{ url_for('editar_viaje', viaje_id=viaje.id) }}">Editar</a>
+                                <form class="inline-form" action="{{ url_for('eliminar_viaje', viaje_id=viaje.id) }}" method="post">
+                                    <button class="button" type="submit">Borrar</button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">Aún no hay viajes registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Viaje</title>
+    <link href="{{ url_for('static', filename='style.css', v=3) }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="i_bienvenida">
+        <h1>Editar Viaje</h1>
+        <a class="button secondary" href="{{ url_for('viajes') }}">Inicio</a>
+        <a class="button secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </div>
+
+    {% for mensaje in get_flashed_messages() %}
+        <p>{{ mensaje }}</p>
+    {% endfor %}
+
+        <form class="ev" action="{{ url_for('editar_viaje', viaje_id=viaje.id) }}" method="post">
+            <label for="destino">Destino:</label>
+            <input type="text" id="destino" name="destino" value="{{ viaje.destino }}" minlength="3" required>
+            <label for="fecha_inicio">Fecha de inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" min="{{ today }}" value="{{ viaje.fecha_inicio.strftime('%Y-%m-%d') if viaje.fecha_inicio else '' }}" required>
+            <label for="fecha_fin">Fecha de fin:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" min="{{ today }}" value="{{ viaje.fecha_fin.strftime('%Y-%m-%d') if viaje.fecha_fin else '' }}" required>
+            <label for="itinerario">Itinerario:</label>
+            <textarea id="itinerario" name="itinerario" maxlength="255" required>{{ viaje.itinerario }}</textarea>
+            <button type="submit">Guardar</button>
+        </form>
+
+</body>
+</html>

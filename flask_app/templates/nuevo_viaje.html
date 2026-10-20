@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Viaje</title>
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="i_bienvenida">
+        <h1>Nuevo Viaje</h1>
+        <a class="button secondary" href="{{ url_for('viajes') }}">Inicio</a>
+        <a class="button secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+    </div>
+
+        {% for mensaje in get_flashed_messages() %}
+            <p>{{ mensaje }}</p>
+        {% endfor %}
+        <div>
+        <form class="nv" action="{{ url_for('nuevo_viaje') }}" method="post">
+            <label for="destino">Destino:</label>
+            <input type="text" id="destino" name="destino" minlength="3" required>
+            <label for="fecha_inicio">Fecha de inicio:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" min="{{ today }}" required>
+            <label for="fecha_fin">Fecha de fin:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" min="{{ today }}" required>
+            <label for="itinerario">Itinerario:</label>
+            <textarea id="itinerario" name="itinerario" maxlength="255" required></textarea>
+            <button type="submit">Guardar</button>
+        </form>
+        </div>
+ 
+</body>
+</html>

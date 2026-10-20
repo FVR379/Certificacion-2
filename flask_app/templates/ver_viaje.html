@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Viaje</title>
+    <link href="/static/style.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+    <a class="button secondary" href="{{ url_for('viajes') }}">Inicio</a>
+    <a class="button secondary" href="{{ url_for('logout') }}">Cerrar sesión</a>
+</div>
+
+    {% for mensaje in get_flashed_messages() %}
+        <p class="message">{{ mensaje }}</p>
+    {% endfor %}
+
+    <div class="vviaje">
+        <div>
+            <h1>{{ viaje.destino }}</h1>
+            <p>Organizador: {{ viaje.usuario }}</p><br>
+            <p>Fecha de inicio: {{ viaje.fecha_inicio.strftime('%Y-%m-%d') }}</p>
+            <p>Fecha de fin: {{ viaje.fecha_fin.strftime('%Y-%m-%d') }}</p>
+            <p>Itinerario: {{ viaje.itinerario }}</p>
+        </div>
+        <section class="travelers">
+            <h2>Viajeros</h2>
+            <ul>
+                {% for viajero in viaje.viajeros %}
+                    <li>{{ viajero.nombre }} {{ viajero.apellido }}</li>
+                {% else %}
+                    <li>Aún no hay viajeros unidos.</li>
+                {% endfor %}
+            </ul>
+            {% if not es_organizador %}
+                {% if esta_unido %}
+                    <form action="{{ url_for('cancelar_viaje', viaje_id=viaje.id) }}" method="post">
+                        <button type="submit">Cancelar</button>
+                    </form>
+                {% else %}
+                    <form action="{{ url_for('unirse_viaje', viaje_id=viaje.id) }}" method="post">
+                        <button type="submit">Unirme!</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </section>
+    </div>
+
+</body>
+</html>

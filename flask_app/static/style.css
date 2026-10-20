@@ -1,0 +1,96 @@
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.registro{
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.login{
+    max-width: 300px;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.button {
+    display: inline-block;
+    padding: 3px 6px;
+    font-size: 14px;
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.inline-form {
+    display: inline;
+}
+
+.inline-form button {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    color: #00e;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.i_bienvenida{
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+table, th, td {
+    border: 1px solid black; 
+    border-collapse: collapse; 
+    padding: 16px;
+}
+
+.nv{
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+    gap: 10px;
+    max-width: 300px;
+}
+
+.nv button {
+    grid-column: 2;
+    justify-self: start;
+}
+
+.ev{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.vviaje{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border: solid black 1px;
+    width: 500px;
+    gap: 20px;
+    margin: auto;
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.travelers{
+    background-color: #777980;
+    border: solid black 1px;
+}
